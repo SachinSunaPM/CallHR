@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@callhr/contracts": "file:../../packages/contracts",
+    "@callhr/database": "file:../../packages/database",
     "@fastify/cors": "^11.0.1",
     "fastify": "^5.2.1"
   },

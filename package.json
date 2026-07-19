@@ -7,20 +7,30 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently --names api,web --prefix-colors blue,green \"npm run dev --workspace=@callhr/api\" \"npm run dev --workspace=@callhr/web\"",
-    "build": "npm run build --workspace=@callhr/contracts && npm run build --workspace=@callhr/api && npm run build --workspace=@callhr/web",
+    "dev": "npm run build --workspace=@callhr/database && concurrently --names api,web --prefix-colors blue,green \"npm run dev --workspace=@callhr/api\" \"npm run dev --workspace=@callhr/web\"",
+    "build": "npm run build --workspace=@callhr/contracts && npm run build --workspace=@callhr/database && npm run build --workspace=@callhr/api && npm run build --workspace=@callhr/web",
     "test": "npm run test --workspace=@callhr/api && npm run test --workspace=@callhr/web",
-    "typecheck": "npm run build --workspace=@callhr/contracts && npm run typecheck --workspace=@callhr/api && npm run typecheck --workspace=@callhr/web"
+    "typecheck": "npm run build --workspace=@callhr/contracts && npm run build --workspace=@callhr/database && npm run typecheck --workspace=@callhr/api && npm run typecheck --workspace=@callhr/web",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down",
+    "db:status": "docker compose ps",
+    "db:generate": "npm run generate --workspace=@callhr/database",
+    "db:migrate": "npm run migrate --workspace=@callhr/database",
+    "db:check": "npm run check --workspace=@callhr/database"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.13.10",
+    "@types/pg": "^8.11.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "0.45.2",
     "jsdom": "^26.0.0",
+    "pg": "^8.13.3",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vitest": "^3.0.7"
