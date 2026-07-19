@@ -6,6 +6,19 @@ CallHR is a planned web application for private, one-to-one communication betwee
 
 CallHR is in the planning and documentation stage. It is not yet an application, and it is not ready for real users or production use.
 
+## Phase 1A commands
+
+This phase adds a small browser frontend and backend health check. Install the project packages, then run the checks with:
+
+```sh
+npm install
+npm run typecheck
+npm run test
+npm run build
+```
+
+To start the frontend and backend together during local development, run `npm run dev`. The backend listens on `http://localhost:3000` by default, and the frontend uses the address Vite displays in the terminal.
+
 ## Planned MVP features
 
 The first version of CallHR is planned to include:
