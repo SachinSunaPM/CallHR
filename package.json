@@ -1,0 +1,28 @@
+{
+  "name": "callhr",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently --names api,web --prefix-colors blue,green \"npm run dev --workspace=@callhr/api\" \"npm run dev --workspace=@callhr/web\"",
+    "build": "npm run build --workspace=@callhr/contracts && npm run build --workspace=@callhr/api && npm run build --workspace=@callhr/web",
+    "test": "npm run test --workspace=@callhr/api && npm run test --workspace=@callhr/web",
+    "typecheck": "npm run build --workspace=@callhr/contracts && npm run typecheck --workspace=@callhr/api && npm run typecheck --workspace=@callhr/web"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.7"
+  }
+}
