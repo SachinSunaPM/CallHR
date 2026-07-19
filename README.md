@@ -19,6 +19,21 @@ npm run build
 
 To start the frontend and backend together during local development, run `npm run dev`. The backend listens on `http://localhost:3000` by default, and the frontend uses the address Vite displays in the terminal.
 
+## Phase 1B local database
+
+Phase 1B adds PostgreSQL, which is a program that stores structured application data. Docker Desktop must be running before you start it.
+
+1. Copy `.env.example` to a new `.env` file. On PowerShell, run `Copy-Item .env.example .env`.
+2. Open `.env` and replace the example password with your own local development password.
+3. Start PostgreSQL with `npm run db:up`.
+4. Wait until `npm run db:status` shows the database as healthy.
+5. Create the infrastructure table with `npm run db:migrate`.
+6. Check the connection with `npm run db:check`.
+7. Start the backend and frontend together with `npm run dev`.
+8. Stop PostgreSQL with `npm run db:down` when you are finished. This does not delete the saved database volume.
+
+The `.env` file must never be committed because it contains your local database password. The tracked `.env.example` file contains only safe example values.
+
 ## Planned MVP features
 
 The first version of CallHR is planned to include:

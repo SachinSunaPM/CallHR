@@ -14,7 +14,11 @@ function isHealthResponse(value: unknown): value is HealthResponse {
   }
 
   const response = value as Record<string, unknown>;
-  return typeof response.status === "string" && typeof response.service === "string";
+  return (
+    (response.status === "ok" || response.status === "error") &&
+    typeof response.service === "string" &&
+    (response.database === "connected" || response.database === "unavailable")
+  );
 }
 
 export function App() {
@@ -28,7 +32,7 @@ export function App() {
         const response = await fetch(`${apiUrl}/health`);
         const data: unknown = await response.json();
 
-        if (!response.ok || !isHealthResponse(data)) {
+        if (!isHealthResponse(data)) {
           throw new Error("The health response was not valid.");
         }
 
@@ -57,9 +61,12 @@ export function App() {
         <h2>Backend status</h2>
         {health.kind === "loading" && <p>Checking the backend…</p>}
         {health.kind === "success" && (
-          <p>
-            {health.response.status} — {health.response.service}
-          </p>
+          <>
+            <p>
+              API: {health.response.status} — {health.response.service}
+            </p>
+            <p>Database: {health.response.database}</p>
+          </>
         )}
         {health.kind === "error" && <p>Could not reach the backend.</p>}
       </section>
